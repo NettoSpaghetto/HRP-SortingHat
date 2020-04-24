@@ -14,10 +14,10 @@ local Houses = {
 }
 
 local function PlayerHouseChecker(ply, house)
-	if SSQL.Query("SELECT userid FROM " ..  house .. " WHERE userid == " .. ply:SteamID64() ) then
+	if SSQL.Query("SELECT userid FROM " .. sql.SQLStr(house) .. " WHERE userid = " .. sql.SQLStr(ply:SteamID64()) ) then
 		return true
 	else
-		return false
+		return nil
 	end
 end
 
@@ -44,13 +44,36 @@ function ENT:Initialize()
 end
 
 function ENT:Use(ent, ply)
-	for k, v in pairs(Houses) do
-		if !PlayerHouseChecker(ply, v) then
-			return true
-		end
+	local housecounter = 0
+	-- for k, v in pairs(Houses) do
+	-- 	if !SSQL.Query("SELECT userid FROM " .. sql.SQLStr(v) .. " WHERE userid = " .. sql.SQLStr(ply:SteamID64()) ) then
+	-- 		housecounter = housecounter + 1
+	-- 	end
+	-- 	if housecounter == 4 then
+	-- 	end
+	-- end
+	for z1, z2 in pairs(Houses) do
+		SSQL.Query("SELECT userid FROM " .. z2 .. " WHERE userid = " .. ply:SteamID64(), function(data)
+			if !data then 
+				housecounter = housecounter + 1
+				return
+			end
+			for k1, k2 in pairs(data) do
+				for v1, v2 in pairs(k2) do
+					if v2 != ply:SteamID64() then
+						housecounter = housecounter + 1
+					end
+				end
+			end
+		end)
 	end
-	net.Start("OpenSortingHatMenu")
-	net.Send(ply)
+	if housecounter == 4 then
+		net.Start("OpenSortingHatMenu")
+		net.Send(ply)
+	else
+		ply:PrintMessage(HUD_PRINTTALK, "You cannot be sorted twice!")
+	end
+	print("has ran")
 end
 
 net.Receive("PlayerJoinedHouse", function(len, ply)

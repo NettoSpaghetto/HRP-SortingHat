@@ -209,6 +209,7 @@ net.Receive( "OpenSortingHatMenu", function()
 			net.Start("PlayerJoinedHouse")
 			net.WriteUInt(ChosenHouseInt-1, 2)
 			net.SendToServer()
+			print("playerjoinedhousesent")
 		end
 
 	SortingHatImage = vgui.Create("DImage", SortingHatMenu)
@@ -221,14 +222,14 @@ net.Receive( "OpenSortingHatMenu", function()
 	end
 
 	function HouseRotationUI()
-		for i = 1, 9 do
+		for i = 1, 8 do
 			coroutine.wait(2)
 			sortinghat_listOfHouses[HouseRotationNumber].imageid()
 			HouseRotationNumber = math.random(#sortinghat_listOfHouses)
 		end
 		coroutine.wait(3)
 		ChosenHouse.movetocenter(scrw, scrh)
-		coroutine.wait(2)
+		coroutine.wait(3)
 		SortingHatMenu:Close()
 		coroutine.yield()
 	end

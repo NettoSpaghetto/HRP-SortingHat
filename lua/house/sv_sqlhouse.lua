@@ -1,5 +1,12 @@
 SSQL = {}
 
+local Houses = {
+	[1] = "Gryffindor",
+	[2] = "Slytherin",
+	[3] = "Ravenclaw",
+	[4] = "Hufflepuff"
+}
+
 function SSQL.Query(q, callback)
     local query = sql.Query( q )
     if callback then
