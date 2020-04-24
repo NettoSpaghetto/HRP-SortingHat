@@ -209,7 +209,6 @@ net.Receive( "OpenSortingHatMenu", function()
 			net.Start("PlayerJoinedHouse")
 			net.WriteUInt(ChosenHouseInt-1, 2)
 			net.SendToServer()
-			print("playerjoinedhousesent")
 		end
 
 	SortingHatImage = vgui.Create("DImage", SortingHatMenu)
