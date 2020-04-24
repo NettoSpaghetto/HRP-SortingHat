@@ -64,7 +64,7 @@ net.Receive("PlayerJoinedHouse", function(len, ply)
 
 	local house = net.ReadUInt(2)
 
-	PlayerHouseJoin(ply, Houses[house+1])
+	PlayerHouseJoin(ply, Houses[house + 1])
 
 	net.Start("WelcomePlayer")
 	net.WriteUInt(house, 2)

@@ -1,12 +1,5 @@
 SSQL = {}
 
-local Houses = {
-	[1] = "Gryffindor",
-	[2] = "Slytherin",
-	[3] = "Ravenclaw",
-	[4] = "Hufflepuff"
-}
-
 function SSQL.Query(q, callback)
     local query = sql.Query( q )
     if callback then
@@ -33,5 +26,5 @@ end
 SSQL.CreateTables()
 
 function PlayerHouseJoin(ply, house)
-    SSQL.Query("INSERT INTO " .. sql.SQLStr(house) .. "(charid) VALUES(" .. sql.SQLStr(ply:SteamID64()) .. ")")
+    SSQL.Query("INSERT INTO " .. sql.SQLStr(house) .. "(charid) VALUES(" .. sql.SQLStr(ply:GetCharacterID()) .. ")")
 end
