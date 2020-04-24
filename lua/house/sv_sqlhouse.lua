@@ -17,21 +17,21 @@ end
 
 function SSQL.CreateTables() -- Creates the House tables
     if !sql.TableExists("Gryffindor") then
-        SSQL.Query("CREATE TABLE Gryffindor(userid TEXT, points INTEGER)")
+        SSQL.Query("CREATE TABLE Gryffindor(charid TEXT, points INTEGER)")
     end
     if !sql.TableExists("Slytherin") then
-        SSQL.Query("CREATE TABLE Slytherin(userid TEXT, points INTEGER)")
+        SSQL.Query("CREATE TABLE Slytherin(charid TEXT, points INTEGER)")
     end
     if !sql.TableExists("Ravenclaw") then
-        SSQL.Query("CREATE TABLE Ravenclaw(userid TEXT, points INTEGER)")
+        SSQL.Query("CREATE TABLE Ravenclaw(charid TEXT, points INTEGER)")
     end
     if !sql.TableExists("Hufflepuff") then
-        SSQL.Query("CREATE TABLE Hufflepuff(userid TEXT, points INTEGER)")
+        SSQL.Query("CREATE TABLE Hufflepuff(charid TEXT, points INTEGER)")
     end
 end
 
 SSQL.CreateTables()
 
 function PlayerHouseJoin(ply, house)
-    SSQL.Query("INSERT INTO " .. sql.SQLStr(house) .. "(userid) VALUES(" .. sql.SQLStr(ply:SteamID64()) .. ")")
+    SSQL.Query("INSERT INTO " .. sql.SQLStr(house) .. "(charid) VALUES(" .. sql.SQLStr(ply:SteamID64()) .. ")")
 end

@@ -13,14 +13,6 @@ local Houses = {
 	[4] = "Hufflepuff"
 }
 
-local function PlayerHouseChecker(ply, house)
-	if SSQL.Query("SELECT userid FROM " .. sql.SQLStr(house) .. " WHERE userid = " .. sql.SQLStr(ply:SteamID64()) ) then
-		return true
-	else
-		return nil
-	end
-end
-
 function ENT:SpawnFunction( ply, tr )
 	if ( !tr.Hit ) then return end
 	local SpawnPos = tr.HitPos + tr.HitNormal * 25
@@ -53,7 +45,7 @@ function ENT:Use(ent, ply)
 			end
 			for k1, k2 in pairs(data) do
 				for v1, v2 in pairs(k2) do
-					if v2 != ply:SteamID64() then
+					if v2 != ply:GetCharacterID() then
 						housecounter = housecounter + 1
 					end
 				end
