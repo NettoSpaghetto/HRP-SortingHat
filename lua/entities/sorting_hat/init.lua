@@ -6,6 +6,13 @@ util.AddNetworkString( "OpenSortingHatMenu" )
 util.AddNetworkString( "PlayerJoinedHouse" )
 util.AddNetworkString( "WelcomePlayer" )
 
+local Houses = {
+	[1] = "Gryffindor",
+	[2] = "Slytherin",
+	[3] = "Ravenclaw",
+	[4] = "Hufflepuff"
+}
+
 function ENT:SpawnFunction( ply, tr )
 	if ( !tr.Hit ) then return end
 	local SpawnPos = tr.HitPos + tr.HitNormal * 25
@@ -36,6 +43,9 @@ end
 net.Receive("PlayerJoinedHouse", function(len, ply)
 
 	local house = net.ReadUInt(2)
+
+	PlayerHouseJoin(ply, Houses[house+1])
+
 	net.Start("WelcomePlayer")
 	net.WriteUInt(house, 2)
 	net.WriteEntity(ply)
