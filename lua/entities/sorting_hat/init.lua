@@ -13,6 +13,14 @@ local Houses = {
 	[4] = "Hufflepuff"
 }
 
+local function PlayerHouseChecker(ply, house)
+	if SSQL.Query("SELECT userid FROM " ..  house .. " WHERE userid == " .. ply:SteamID64() ) then
+		return true
+	else
+		return false
+	end
+end
+
 function ENT:SpawnFunction( ply, tr )
 	if ( !tr.Hit ) then return end
 	local SpawnPos = tr.HitPos + tr.HitNormal * 25
@@ -36,6 +44,11 @@ function ENT:Initialize()
 end
 
 function ENT:Use(ent, ply)
+	for k, v in pairs(Houses) do
+		if !PlayerHouseChecker(ply, v) then
+			return true
+		end
+	end
 	net.Start("OpenSortingHatMenu")
 	net.Send(ply)
 end
