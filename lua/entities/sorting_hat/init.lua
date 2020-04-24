@@ -45,16 +45,9 @@ end
 
 function ENT:Use(ent, ply)
 	local housecounter = 0
-	-- for k, v in pairs(Houses) do
-	-- 	if !SSQL.Query("SELECT userid FROM " .. sql.SQLStr(v) .. " WHERE userid = " .. sql.SQLStr(ply:SteamID64()) ) then
-	-- 		housecounter = housecounter + 1
-	-- 	end
-	-- 	if housecounter == 4 then
-	-- 	end
-	-- end
 	for z1, z2 in pairs(Houses) do
-		SSQL.Query("SELECT userid FROM " .. z2 .. " WHERE userid = " .. ply:SteamID64(), function(data)
-			if !data then 
+		SSQL.Query("SELECT userid FROM " .. sql.SQLStr(z2) .. " WHERE userid = " .. sql.SQLStr(ply:SteamID64()), function(data)
+			if !data then
 				housecounter = housecounter + 1
 				return
 			end
@@ -73,7 +66,6 @@ function ENT:Use(ent, ply)
 	else
 		ply:PrintMessage(HUD_PRINTTALK, "You cannot be sorted twice!")
 	end
-	print("has ran")
 end
 
 net.Receive("PlayerJoinedHouse", function(len, ply)

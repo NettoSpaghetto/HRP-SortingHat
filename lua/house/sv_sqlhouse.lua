@@ -34,6 +34,6 @@ SSQL.CreateTables()
 print("tables created")
 
 function PlayerHouseJoin(ply, house)
-    SSQL.Query("INSERT INTO " .. house .. "(userid) VALUES(" .. sql.SQLStr(ply:SteamID64()) .. ")")
+    SSQL.Query("INSERT INTO " .. sql.SQLStr(house) .. "(userid) VALUES(" .. sql.SQLStr(ply:SteamID64()) .. ")")
     print("player added to house")
 end
