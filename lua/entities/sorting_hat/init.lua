@@ -38,7 +38,7 @@ end
 function ENT:Use(ent, ply)
 	local housecounter = 0
 	for z1, z2 in pairs(Houses) do
-		SSQL.Query("SELECT charid FROM " .. sql.SQLStr(z2) .. " WHERE charid = " .. sql.SQLStr(ply:SteamID64()), function(data)
+		SSQL.Query("SELECT charid FROM " .. sql.SQLStr(z2) .. " WHERE charid = " .. sql.SQLStr(ply:GetCharacterID()), function(data)
 			if !data then
 				housecounter = housecounter + 1
 				return
