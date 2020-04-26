@@ -1,7 +1,7 @@
 ENT.Type = "anim"
 ENT.Base = "base_gmodentity"
 ENT.PrintName = "Sorting Hat"
-ENT.Author = "Stan & Sweg"
+ENT.Author = "Netto Spaghetto"
 ENT.Category = "Hogwarts RolePlay"
 ENT.Spawnable = true
 ENT.AdminSpawnable = true
