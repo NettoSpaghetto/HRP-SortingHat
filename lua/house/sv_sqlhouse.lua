@@ -1,5 +1,7 @@
 SSQL = {}
 
+local Player = FindMetaTable("Player")
+
 function SSQL.Query(q, callback)
     local query = sql.Query( q )
     if callback then
@@ -27,4 +29,18 @@ SSQL.CreateTables()
 
 function PlayerHouseJoin(ply, house)
     SSQL.Query("INSERT INTO " .. sql.SQLStr(house) .. "(charid) VALUES(" .. sql.SQLStr(ply:GetCharacterID()) .. ")")
+end
+
+function Player:InFaction(house)
+    SSQL.Query("SELECT charid FROM " .. sql.SQLStr(house) .. " WHERE charid = " .. sql.SQLStr(Player:GetCharacterID()), function(data)
+        if house then
+            if data then
+                return true
+            else
+                return false
+            end
+        else
+            return false
+        end
+    end)
 end
