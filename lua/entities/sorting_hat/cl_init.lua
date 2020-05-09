@@ -201,7 +201,7 @@ net.Receive( "OpenSortingHatMenu", function()
 
 			surface.SetDrawColor(black)
 			surface.DrawRect(0, 0, scrw, scrh)
-			draw.SimpleText("Your new house is...", "panelText", scrw/2-10,scrh*1/2-50, white, TEXT_ALIGN_CENTER, TEXT_ALIGN_TOP)
+			draw.SimpleText("Your new house is...", "panelText", scrw / 2 - 10,scrh * 1 / 2 - 50, white, TEXT_ALIGN_CENTER, TEXT_ALIGN_TOP)
 
 		end
 
@@ -245,7 +245,7 @@ end)
 
 net.Receive("WelcomePlayer", function()
 	local house = net.ReadUInt(2)
-	local housename = Houses[house+1]
+	local housename = Houses[house + 1]
 	local ply = net.ReadEntity()
 	LocalPlayer():ChatPrint("Please welcome " .. ply:Nick() .. " to " .. housename .. "!")
 end)
