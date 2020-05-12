@@ -193,7 +193,7 @@ net.Receive( "OpenSortingHatMenu", function()
 		SortingHatMenu:AlphaTo(255, 1)
 		SortingHatMenu:Center()
 		SortingHatMenu:SetTitle("")
-		SortingHatMenu:ShowCloseButton(true)
+		SortingHatMenu:ShowCloseButton(false)
 		SortingHatMenu:SetDraggable(false)
 		SortingHatMenu:IsMouseInputEnabled(false)
 
@@ -247,6 +247,7 @@ net.Receive("WelcomePlayer", function()
 	local house = net.ReadUInt(2)
 	local housename = Houses[house + 1]
 	local ply = net.ReadEntity()
+        ply:SetNWString( "House", housename )
 	LocalPlayer():ChatPrint("Please welcome " .. ply:Nick() .. " to " .. housename .. "!")
 end)
 
