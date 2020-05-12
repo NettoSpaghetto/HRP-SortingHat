@@ -38,7 +38,7 @@ end
 function ENT:Use(ent, ply)
 	local housecounter = 0
 	for z1, z2 in pairs(Houses) do
-		SSQL.Query("SELECT charid FROM " .. sql.SQLStr(z2) .. " WHERE charid = " .. sql.SQLStr(ply:GetCharacterID()), function(data)
+		HSQL.Query("SELECT charid FROM " .. sql.SQLStr(z2) .. " WHERE charid = " .. sql.SQLStr(ply:GetCharacterID()), function(data)
 			if !data then
 				housecounter = housecounter + 1
 				return
@@ -64,11 +64,12 @@ net.Receive("PlayerJoinedHouse", function(len, ply)
 
 	local house = net.ReadUInt(2)
 
-	PlayerHouseJoin(ply, Houses[house + 1])
+	HSQL.PlayerHouseJoin(ply, Houses[house + 1])
 
 	net.Start("WelcomePlayer")
 	net.WriteUInt(house, 2)
 	net.WriteEntity(ply)
 	net.Broadcast()
+
 end)
 
